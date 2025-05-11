@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+export type Transaction = {
+  name: string;
+  bank: string;
+  time: string;
+  amount: number;
+};
+
 export type AccountData = {
   bankName: string;
   accountNo: string;
@@ -8,7 +15,7 @@ export type AccountData = {
   dateAdded: string;
   currency: string;
   availableBalance: number;
-  transactions: Array<any>;
+  transactions: Array<Transaction>;
   accountType: string;
 };
 

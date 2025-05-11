@@ -1,0 +1,15 @@
+export const COLORS = {
+  PRIMARY: "#2C14DD",
+  TEXT_PRIMARY: "#000000",
+  SECONDARY: "#6C727F",
+  BACKGROUND: "#FFFFFF",
+  BACKGROUND_PAPER: "#F5F7FF",
+  ERROR: "#DC2626",
+  SUCCESS: "#059669",
+  BORDER_LIGHT: "#E5E7EB",
+  BORDER_MAIN: "#D1D5DB",
+  WHITE: "#FFFFFF",
+  SHADOW_COLOR: "#000000",
+} as const;
+
+export type ColorKey = keyof typeof COLORS;

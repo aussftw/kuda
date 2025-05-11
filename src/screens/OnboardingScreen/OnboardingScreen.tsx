@@ -4,11 +4,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
-import SkipButton from "./components/SkipButton";
+import Container from "../../shared/components/Container/Container";
 import OnboardingCarousel from "./components/OnboardingCarousel";
 import { RootStackParamList } from "../../navigation";
-import Container from "../../shared/components/Container/Container";
-
+import SkipButton from "./components/SkipButton";
+import { COLORS } from "../../shared/constants";
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "Onboarding"
@@ -23,7 +23,7 @@ const OnboardingScreen: React.FC = () => {
   }, [navigation]);
 
   return (
-    <Container statusBarStyle="auto" backgroundColor="#F5F7FF">
+    <Container statusBarStyle="auto" backgroundColor={COLORS.BACKGROUND_PAPER}>
       <SkipButton onPress={completeOnboarding} />
       <OnboardingCarousel onComplete={completeOnboarding} />
     </Container>

@@ -8,6 +8,7 @@ import {
   Linking,
 } from "react-native";
 
+import { COLORS } from "../../constants";
 type LinkTextProps = {
   text: string;
   onPress?: () => void;
@@ -25,7 +26,7 @@ const LinkText: React.FC<LinkTextProps> = ({ text, onPress, style }) => {
 
 const styles = StyleSheet.create({
   linkText: {
-    color: "#2C14DD",
+    color: COLORS.PRIMARY,
     fontWeight: "500",
   },
 });

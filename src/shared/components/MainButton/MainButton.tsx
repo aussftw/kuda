@@ -8,6 +8,8 @@ import {
   StyleProp,
 } from "react-native";
 
+import { COLORS } from "../../constants";
+
 type MainButtonProps = {
   title: string;
   onPress: () => void;
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    color: "#fff",
+    color: COLORS.WHITE,
     fontSize: 16,
     fontWeight: "600",
     lineHeight: 24,

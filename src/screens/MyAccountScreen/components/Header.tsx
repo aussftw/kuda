@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../../shared/constants";
 
 type HeaderProps = {
   title: string;
@@ -10,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => (
   <View style={styles.header}>
     <View style={styles.backButtonContainer}>
       <TouchableOpacity disabled>
-        <Ionicons name="chevron-back" size={24} color="black" />
+        <Ionicons name="chevron-back" size={24} color={COLORS.TEXT_PRIMARY} />
       </TouchableOpacity>
     </View>
     <Text style={styles.headerTitle}>{title}</Text>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   backButtonContainer: {
     width: 30,
     height: 30,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.WHITE,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",

@@ -9,7 +9,8 @@ import {
   getInitialLetter,
 } from "../../../helpers";
 
-import { AccountData } from "../../../store/useAccountStore";
+import { AccountData, Transaction } from "../../../store/useAccountStore";
+import { COLORS } from "../../../shared/constants";
 import BankLogo from "../../../assets/BankLogo";
 
 type AccountDetailsProps = {
@@ -17,6 +18,41 @@ type AccountDetailsProps = {
 };
 
 const AccountDetails: React.FC<AccountDetailsProps> = ({ account }) => {
+  const renderTransactionItem = (transaction: Transaction, index: number) => {
+    const isLast = index === account.transactions.length - 1;
+
+    return (
+      <View
+        key={index}
+        style={[styles.transactionItem, isLast && styles.noBorder]}
+      >
+        <View style={styles.transactionLeft}>
+          <View style={styles.transactionAvatar}>
+            <Text style={styles.avatarText}>
+              {getInitialLetter(transaction.name)}
+            </Text>
+          </View>
+          <View style={styles.transactionDetails}>
+            <Text style={styles.transactionName}>{transaction.name}</Text>
+            <Text style={styles.transactionBank}>
+              {transaction.bank} {transaction.time}
+            </Text>
+          </View>
+          <Text
+            style={[
+              styles.transactionAmount,
+              transaction.amount > 0
+                ? styles.positiveAmount
+                : styles.negativeAmount,
+            ]}
+          >
+            {formatTransactionAmount(account.currency, transaction.amount)}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.bankContainer}>
@@ -54,36 +90,14 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({ account }) => {
       <View style={styles.transactionsContainer}>
         <View style={styles.transactionsHeader}>
           <Text style={styles.transactionsTitle}>Recent Transactions</Text>
-          <Ionicons name="chevron-forward" size={16} color="#333" />
+          <Ionicons
+            name="chevron-forward"
+            size={16}
+            color={COLORS.TEXT_PRIMARY}
+          />
         </View>
 
-        {account.transactions.map((transaction, index) => (
-          <View key={index} style={styles.transactionItem}>
-            <View style={styles.transactionLeft}>
-              <View style={styles.transactionAvatar}>
-                <Text style={styles.avatarText}>
-                  {getInitialLetter(transaction.name)}
-                </Text>
-              </View>
-              <View style={styles.transactionDetails}>
-                <Text style={styles.transactionName}>{transaction.name}</Text>
-                <Text style={styles.transactionBank}>
-                  {transaction.bank} {transaction.time}
-                </Text>
-              </View>
-              <Text
-                style={[
-                  styles.transactionAmount,
-                  transaction.amount > 0
-                    ? styles.positiveAmount
-                    : styles.negativeAmount,
-                ]}
-              >
-                {formatTransactionAmount(account.currency, transaction.amount)}
-              </Text>
-            </View>
-          </View>
-        ))}
+        {account.transactions.map(renderTransactionItem)}
       </View>
     </View>
   );
@@ -114,12 +128,12 @@ const styles = StyleSheet.create({
     marginTop: 17,
   },
   accountDetailsCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.WHITE,
     borderRadius: 12,
     padding: 16,
 
     marginBottom: 24,
-    shadowColor: "#000",
+    shadowColor: COLORS.SHADOW_COLOR,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
@@ -132,23 +146,23 @@ const styles = StyleSheet.create({
   },
   accountLabel: {
     fontSize: 14,
-    color: "#6C727F",
+    color: COLORS.SECONDARY,
   },
   accountValue: {
     fontSize: 14,
     fontWeight: "500",
-    color: "#131313",
+    color: COLORS.TEXT_PRIMARY,
   },
   balanceText: {
     fontSize: 14,
-    color: "#009218",
+    color: COLORS.SUCCESS,
     fontWeight: "500",
   },
   transactionsContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.WHITE,
     borderRadius: 12,
     marginBottom: 24,
-    shadowColor: "#000",
+    shadowColor: COLORS.SHADOW_COLOR,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
@@ -160,12 +174,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#F5F5F5",
+    borderBottomColor: COLORS.BORDER_LIGHT,
   },
   transactionsTitle: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#131313",
+    color: COLORS.TEXT_PRIMARY,
   },
   transactionItem: {
     flexDirection: "row",
@@ -173,7 +187,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#F5F5F5",
+    borderBottomColor: COLORS.BORDER_LIGHT,
+  },
+  noBorder: {
+    borderBottomWidth: 0,
+    borderBottomColor: "transparent",
   },
   transactionLeft: {
     flexDirection: "row",
@@ -186,12 +204,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 12,
-    backgroundColor: "#F5F7FF",
+    backgroundColor: COLORS.BACKGROUND_PAPER,
   },
   avatarText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#2C14DD",
+    color: COLORS.PRIMARY,
   },
   transactionDetails: {
     flex: 1,
@@ -203,17 +221,17 @@ const styles = StyleSheet.create({
   },
   transactionBank: {
     fontSize: 14,
-    color: "#6C727F",
+    color: COLORS.SECONDARY,
   },
   transactionAmount: {
     fontSize: 14,
     fontWeight: "500",
   },
   positiveAmount: {
-    color: "#009218",
+    color: COLORS.SUCCESS,
   },
   negativeAmount: {
-    color: "#333",
+    color: COLORS.TEXT_PRIMARY,
   },
 });
 

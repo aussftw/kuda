@@ -11,8 +11,8 @@ import {
   FlatList as FlatListType,
 } from "react-native";
 
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MainButton from "../../../shared/components/MainButton/MainButton";
+import { COLORS } from "../../../shared/constants";
 import { slides } from "./slides";
 
 type Slide = {
@@ -34,7 +34,6 @@ const OnboardingCarousel: React.FC<OnboardingCarouselProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatListType<Slide>>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const insets = useSafeAreaInsets();
 
   const viewableItemsChanged = useRef(
     ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
@@ -102,7 +101,7 @@ const OnboardingCarousel: React.FC<OnboardingCarouselProps> = ({
 
           const backgroundColor = scrollX.interpolate({
             inputRange,
-            outputRange: ["#ccc", "#2C14DD", "#ccc"],
+            outputRange: [COLORS.SECONDARY, COLORS.PRIMARY, COLORS.SECONDARY],
             extrapolate: "clamp",
           });
 
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.WHITE,
     marginHorizontal: 20,
     borderRadius: 30,
     padding: 16,
@@ -180,18 +179,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 36,
     borderRadius: 48,
-    backgroundColor: "#ffffff",
+    backgroundColor: COLORS.WHITE,
     width: "100%",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#2C14DD",
+    color: COLORS.PRIMARY,
     textAlign: "center",
   },
   description: {
     fontSize: 14,
-    color: "#6C727F",
+    color: COLORS.SECONDARY,
     textAlign: "center",
     paddingHorizontal: 20,
     marginTop: 16,
@@ -207,10 +206,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   nextButton: {
-    backgroundColor: "#2C14DD",
+    backgroundColor: COLORS.PRIMARY,
     borderRadius: 25,
     marginTop: 32,
-    //  width: "100%",
   },
 });
 

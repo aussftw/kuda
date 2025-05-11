@@ -19,10 +19,10 @@ import { Ionicons } from "@expo/vector-icons";
 
 import MainButton from "../../../shared/components/MainButton/MainButton";
 import LinkText from "../../../shared/components/LinkText/LinkText";
+import { useScrollEnabled } from "../../../hooks/useScrollEnabled";
 import { useSignup } from "../../../hooks/useSignup";
 import { schema } from "../CreateAccountValidation";
-
-import { useScrollEnabled } from "../../../hooks/useScrollEnabled";
+import { COLORS } from "../../../shared/constants";
 
 const CreateAccountForm: React.FC = ({}) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -146,7 +146,7 @@ const CreateAccountForm: React.FC = ({}) => {
                     <Ionicons
                       name={showPassword ? "eye" : "eye-off"}
                       size={24}
-                      color="#2C14DD"
+                      color={COLORS.PRIMARY}
                     />
                   </TouchableOpacity>
                 </View>
@@ -161,7 +161,11 @@ const CreateAccountForm: React.FC = ({}) => {
                 <Pressable style={styles.checkbox} onPress={handleToggleTerms}>
                   {agreedToTerms && (
                     <View style={styles.checkedBox}>
-                      <Ionicons name="checkmark" size={16} color="#FFF" />
+                      <Ionicons
+                        name="checkmark"
+                        size={16}
+                        color={COLORS.WHITE}
+                      />
                     </View>
                   )}
                 </Pressable>
@@ -208,12 +212,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#2C14DD",
+    color: COLORS.PRIMARY,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: " #6C727F",
+    color: COLORS.SECONDARY,
     marginBottom: 32,
   },
   inputWrapper: {
@@ -221,11 +225,11 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 16,
-    color: "#6C727F",
+    color: COLORS.SECONDARY,
     marginBottom: 8,
   },
   input: {
-    backgroundColor: "#FFF",
+    backgroundColor: COLORS.WHITE,
     height: 56,
     borderRadius: 8,
     paddingHorizontal: 16,
@@ -234,7 +238,7 @@ const styles = StyleSheet.create({
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: COLORS.WHITE,
     borderRadius: 8,
   },
   passwordInput: {
@@ -261,7 +265,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderWidth: 1,
-    borderColor: "#CCC",
+    borderColor: COLORS.BORDER_LIGHT,
     borderRadius: 4,
     marginRight: 12,
     marginTop: 4,
@@ -271,7 +275,7 @@ const styles = StyleSheet.create({
   checkedBox: {
     width: 16,
     height: 16,
-    backgroundColor: "#2C14DD",
+    backgroundColor: COLORS.PRIMARY,
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
@@ -295,7 +299,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   createButton: {
-    backgroundColor: "#2C14DD",
+    backgroundColor: COLORS.PRIMARY,
   },
 });
 
